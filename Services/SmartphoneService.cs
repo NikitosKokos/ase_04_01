@@ -4,8 +4,13 @@ public class SmartphoneService
       Console.Clear();
       SmartphoneRepository r = new SmartphoneRepository();
       List<Smartphone> listSmartphones = r.GetSmartphones();
-      foreach(Smartphone smartphone in listSmartphones){
-         Console.WriteLine(smartphone);
+
+      if(listSmartphones.Count == 0){
+         Console.WriteLine("No smartphones available");
+      }else{
+         foreach(Smartphone smartphone in listSmartphones){
+            Console.WriteLine(smartphone);
+         }
       }
 
       Console.WriteLine("Press Enter to go to the main menu");
@@ -33,9 +38,12 @@ public class SmartphoneService
             searchedSmartphones.Add(item);
          }
       }
-
-      foreach(Smartphone smartphone in searchedSmartphones){
-         Console.WriteLine(smartphone);
+      if(searchedSmartphones.Count == 0){
+         Console.WriteLine("No matching smartphones found :(");
+      }else{
+         foreach(Smartphone smartphone in searchedSmartphones){
+            Console.WriteLine(smartphone);
+         }
       }
 
       Console.WriteLine("Press Enter to go to the main menu");
