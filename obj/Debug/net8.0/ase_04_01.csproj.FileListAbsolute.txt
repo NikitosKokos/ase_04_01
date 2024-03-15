@@ -12,3 +12,4 @@ D:\Downloads\Howest\Semester 2\ASE\ase_04_01\obj\Debug\net8.0\refint\ase_04_01.d
 D:\Downloads\Howest\Semester 2\ASE\ase_04_01\obj\Debug\net8.0\ase_04_01.pdb
 D:\Downloads\Howest\Semester 2\ASE\ase_04_01\obj\Debug\net8.0\ase_04_01.genruntimeconfig.cache
 D:\Downloads\Howest\Semester 2\ASE\ase_04_01\obj\Debug\net8.0\ref\ase_04_01.dll
+D:\Downloads\Howest\Semester 2\ASE\ase_04_01\obj\Debug\net8.0\ase_04_01.sourcelink.json

@@ -1,8 +1,9 @@
 public class SmartphoneRepository
 {
+   private string _path = "./Files/smartphones.csv";
    public List<Smartphone> GetSmartphones(){
       List<Smartphone> smartphones = new List<Smartphone>();
-      string[] lines = File.ReadAllLines("../Files/smartphones.csv");
+      string[] lines = File.ReadAllLines(_path);
 
       lines = lines.Skip(1).ToArray();
       foreach(var line in lines){
@@ -22,7 +23,7 @@ public class SmartphoneRepository
 
    public Smartphone GetSmartphoneById(int sartphoneId){
       Smartphone smartphone = new Smartphone();
-      string[] lines = File.ReadAllLines("../Files/smartphones.csv");
+      string[] lines = File.ReadAllLines(_path);
 
       lines = lines.Skip(1).ToArray();
       foreach(var line in lines){
@@ -42,12 +43,8 @@ public class SmartphoneRepository
    }
 
    public void AddSmartphone(Smartphone smartphone){
-      using (FileStream fs = new FileStream("./Files/smartphones.csv", FileMode.Append, FileAccess.Write))
-      {
-         using (StreamWriter sw = new StreamWriter(fs))
-         {
-            sw.WriteLine("12,Samsung,Galaxy S21,2021,999,Android");
-         }
-      }
+      string newLine = $"{smartphone.Id},{smartphone.Brand},{smartphone.Type},{smartphone.ReleaseYear},{smartphone.StartPrice},{smartphone.OperatingSystem}";
+
+      File.AppendAllText(_path, Environment.NewLine + newLine);
    }
 }
