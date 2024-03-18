@@ -48,16 +48,26 @@ public class SmartphoneRepository
       return smartphone;
    }
 
-   public void AddSmartphone(Smartphone smartphone){
+   public bool AddSmartphone(Smartphone smartphone){
       try
       {
-      string newLine = $"{smartphone.Id},{smartphone.Brand},{smartphone.Type},{smartphone.ReleaseYear},{smartphone.StartPrice},{smartphone.OperatingSystem}";
+         string newLine = $"{smartphone.Id},{smartphone.Brand},{smartphone.Type},{smartphone.ReleaseYear},{smartphone.StartPrice},{smartphone.OperatingSystem}";
+         
+         List<Smartphone> existingSmartphones = GetSmartphones();
+         Smartphone smartphoneById = GetSmartphoneById(smartphone.Id);
+         
+         if(smartphoneById.Id == smartphone.Id) {
+            Console.WriteLine("Error: Smartphone with the same ID already exists.");
+            return false; // Return false indicating error
+        }
 
-      File.AppendAllText(_path, Environment.NewLine + newLine);
+         File.AppendAllText(_path, Environment.NewLine + newLine);
+         return true;
       }
       catch (Exception ex)
       {
          Console.WriteLine("Error writing to file: " + ex.Message);
+         return false;
       }
    }
 }

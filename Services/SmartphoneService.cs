@@ -1,36 +1,34 @@
 public class SmartphoneService
 {
-   public void ListAllSmartphones(){
-      Console.Clear();
-      SmartphoneRepository r = new SmartphoneRepository();
-      List<Smartphone> listSmartphones = r.GetSmartphones();
+   private SmartphoneRepository _r = new SmartphoneRepository();
+   public List<Smartphone> ListAllSmartphones(){
+      List<Smartphone> listSmartphones = _r.GetSmartphones();
 
-      if(listSmartphones.Count == 0){
-         Console.WriteLine("No smartphones available");
-      }else{
-         foreach(Smartphone smartphone in listSmartphones){
-            Console.WriteLine(smartphone);
-         }
-      }
+      return listSmartphones;
+      // Console.Clear();
+      // SmartphoneRepository r = new SmartphoneRepository();
+      // List<Smartphone> listSmartphones = r.GetSmartphones();
 
-      Console.WriteLine("Press Enter to go to the main menu");
-      ConsoleKeyInfo key = Console.ReadKey(true);
+      // if(listSmartphones.Count == 0){
+      //    Console.WriteLine("No smartphones available");
+      // }else{
+      //    foreach(Smartphone smartphone in listSmartphones){
+      //       Console.WriteLine(smartphone);
+      //    }
+      // }
 
-      switch (key.Key)
-      {
-         case ConsoleKey.Enter:
-            break;
-      }
+      // Console.WriteLine("Press Enter to go to the main menu");
+      // ConsoleKeyInfo key = Console.ReadKey(true);
+
+      // switch (key.Key)
+      // {
+      //    case ConsoleKey.Enter:
+      //       break;
+      // }
    }
 
-   public void SearchSmartphones(){
-      Console.Clear();
-      Console.WriteLine("Search For Smartphones");
-      Console.WriteLine("Enter brand or type:");
-      string value = Console.ReadLine();
-
-      SmartphoneRepository r = new SmartphoneRepository();
-      List<Smartphone> listSmartphones = r.GetSmartphones();
+   public List<Smartphone> SearchSmartphones(string value){
+      List<Smartphone> listSmartphones = _r.GetSmartphones();
       List<Smartphone> searchedSmartphones = new List<Smartphone>();
 
       foreach(Smartphone item in listSmartphones){
@@ -38,54 +36,42 @@ public class SmartphoneService
             searchedSmartphones.Add(item);
          }
       }
-      if(searchedSmartphones.Count == 0){
-         Console.WriteLine("No matching smartphones found :(");
-      }else{
-         foreach(Smartphone smartphone in searchedSmartphones){
-            Console.WriteLine(smartphone);
-         }
-      }
+      return searchedSmartphones;
+      // Console.Clear();
+      // Console.WriteLine("Search For Smartphones");
+      // Console.WriteLine("Enter brand or type:");
+      // string value = Console.ReadLine();
 
-      Console.WriteLine("Press Enter to go to the main menu");
-      ConsoleKeyInfo key = Console.ReadKey(true);
+      // SmartphoneRepository r = new SmartphoneRepository();
+      // List<Smartphone> listSmartphones = _r.GetSmartphones();
+      // List<Smartphone> searchedSmartphones = new List<Smartphone>();
 
-      switch (key.Key)
-      {
-         case ConsoleKey.Enter:
-            break;
-      }
+      // foreach(Smartphone item in listSmartphones){
+      //    if(item.Brand.ToLower().Contains(value.ToLower()) || item.Type.ToLower().Contains(value.ToLower())){
+      //       searchedSmartphones.Add(item);
+      //    }
+      // }
+      // if(searchedSmartphones.Count == 0){
+      //    Console.WriteLine("No matching smartphones found :(");
+      // }else{
+      //    foreach(Smartphone smartphone in searchedSmartphones){
+      //       Console.WriteLine(smartphone);
+      //    }
+      // }
+
+      // Console.WriteLine("Press Enter to go to the main menu");
+      // ConsoleKeyInfo key = Console.ReadKey(true);
+
+      // switch (key.Key)
+      // {
+      //    case ConsoleKey.Enter:
+      //       break;
+      // }
    }
 
-   public void AddNewSmartphone(){
-      Console.Clear();
-      Console.WriteLine("Add New Smartphone");
-      Console.WriteLine("Enter id:");
-      int id = int.Parse(Console.ReadLine());
-      Console.WriteLine("Enter brand:");
-      string brand = Console.ReadLine();
-      Console.WriteLine("Enter type:");
-      string type = Console.ReadLine();
-      Console.WriteLine("Enter release year:");
-      int releaseYear = int.Parse(Console.ReadLine());
-      Console.WriteLine("Enter start price:");
-      int startPrice = int.Parse(Console.ReadLine());
-      Console.WriteLine("Enter operating system:");
-      string operatingSystem = Console.ReadLine();
+   public bool AddNewSmartphone(Smartphone newSmartphone){
+      bool isSuccessful = _r.AddSmartphone(newSmartphone);
 
-      Smartphone newSmartphone = new Smartphone();
-      newSmartphone.Id = id;
-      newSmartphone.Brand = brand;
-      newSmartphone.Type = type;
-      newSmartphone.ReleaseYear = releaseYear;
-      newSmartphone.StartPrice = startPrice;
-      newSmartphone.OperatingSystem = operatingSystem;
-
-      SmartphoneRepository r = new SmartphoneRepository();
-
-      r.AddSmartphone(newSmartphone);
-
-      Task.Delay(200).Wait();
-      Console.WriteLine("Student Added!");
-      Task.Delay(600).Wait();
+      return isSuccessful;
    }
 }

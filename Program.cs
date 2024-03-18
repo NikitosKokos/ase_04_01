@@ -1,21 +1,4 @@
-﻿// SmartphoneRepository smartphoneRepository = new SmartphoneRepository();
-
-// Smartphone smartphone = new Smartphone();
-// smartphone.Id = 13;
-// smartphone.Brand = "Samsung";
-// smartphone.Type = "Galaxy S21";
-// smartphone.ReleaseYear = 2021;
-// smartphone.StartPrice = 999;
-// smartphone.OperatingSystem = "Android";
-
-// smartphoneRepository.AddSmartphone(smartphone);
-
-SmartphoneService smartphoneService = new SmartphoneService();
-
-// smartphoneService.AddNewSmartphone();
-
-// smartphoneService.ListAllSmartphones();
-// smartphoneService.SearchSmartphones();
+﻿SmartphoneService smartphoneService = new SmartphoneService();
 
 bool isSelected = false;
 while(!isSelected){
@@ -26,16 +9,89 @@ while(!isSelected){
    Console.WriteLine("3 - Add a new smartphone to the catalog");
    Console.WriteLine("4 - Exit");
    int option = int.Parse(Console.ReadLine());
+   ConsoleKeyInfo key;
    switch (option)
    {
       case 1:
-         smartphoneService.ListAllSmartphones();
+         Console.Clear();
+         List<Smartphone> listSmartphones = smartphoneService.ListAllSmartphones();
+
+         if(listSmartphones.Count == 0){
+            Console.WriteLine("No smartphones available");
+         }else{
+            foreach(Smartphone smartphone in listSmartphones){
+               Console.WriteLine(smartphone);
+            }
+         }
+
+         Console.WriteLine("Press Enter to go to the main menu");
+         key = Console.ReadKey(true);
+
+         switch (key.Key)
+         {
+            case ConsoleKey.Enter:
+               break;
+         }
          break;
       case 2:
-         smartphoneService.SearchSmartphones();
+         Console.Clear();
+         Console.WriteLine("Search For Smartphones");
+         Console.WriteLine("Enter brand or type:");
+         string value = Console.ReadLine();
+
+         List<Smartphone> searchedSmartphones = smartphoneService.SearchSmartphones(value);
+
+         if(searchedSmartphones.Count == 0){
+            Console.WriteLine("No matching smartphones found :(");
+         }else{
+            foreach(Smartphone smartphone in searchedSmartphones){
+               Console.WriteLine(smartphone);
+            }
+         }
+
+         Console.WriteLine("Press Enter to go to the main menu");
+         key = Console.ReadKey(true);
+
+         switch (key.Key)
+         {
+            case ConsoleKey.Enter:
+               break;
+         }
          break;
       case 3:
-         smartphoneService.AddNewSmartphone();
+         Console.Clear();
+         Console.WriteLine("Add New Smartphone");
+         Console.WriteLine("Enter id:");
+         int id = int.Parse(Console.ReadLine());
+         Console.WriteLine("Enter brand:");
+         string brand = Console.ReadLine();
+         Console.WriteLine("Enter type:");
+         string type = Console.ReadLine();
+         Console.WriteLine("Enter release year:");
+         int releaseYear = int.Parse(Console.ReadLine());
+         Console.WriteLine("Enter start price:");
+         int startPrice = int.Parse(Console.ReadLine());
+         Console.WriteLine("Enter operating system:");
+         string operatingSystem = Console.ReadLine();
+
+         Smartphone newSmartphone = new Smartphone();
+         newSmartphone.Id = id;
+         newSmartphone.Brand = brand;
+         newSmartphone.Type = type;
+         newSmartphone.ReleaseYear = releaseYear;
+         newSmartphone.StartPrice = startPrice;
+         newSmartphone.OperatingSystem = operatingSystem;
+
+         bool isSuccessful = smartphoneService.AddNewSmartphone(newSmartphone);
+
+         Task.Delay(200).Wait();
+         if(isSuccessful){
+            Console.WriteLine("Student Added!");
+         }else{
+            Console.WriteLine("Student NOT Added!");
+         }
+         Task.Delay(600).Wait();
+         // smartphoneService.AddNewSmartphone();
          break;
       case 4:
          isSelected = true;
