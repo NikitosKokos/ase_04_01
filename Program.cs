@@ -1,4 +1,5 @@
-﻿SmartphoneService smartphoneService = new SmartphoneService();
+﻿SmartphoneRepository smartphoneRepository = new SmartphoneRepository();
+SmartphoneService smartphoneService = new SmartphoneService(smartphoneRepository);
 
 bool isSelected = false;
 while(!isSelected){
@@ -61,8 +62,6 @@ while(!isSelected){
       case 3:
          Console.Clear();
          Console.WriteLine("Add New Smartphone");
-         Console.WriteLine("Enter id:");
-         int id = int.Parse(Console.ReadLine());
          Console.WriteLine("Enter brand:");
          string brand = Console.ReadLine();
          Console.WriteLine("Enter type:");
@@ -75,7 +74,6 @@ while(!isSelected){
          string operatingSystem = Console.ReadLine();
 
          Smartphone newSmartphone = new Smartphone();
-         newSmartphone.Id = id;
          newSmartphone.Brand = brand;
          newSmartphone.Type = type;
          newSmartphone.ReleaseYear = releaseYear;
@@ -86,12 +84,11 @@ while(!isSelected){
 
          Task.Delay(200).Wait();
          if(isSuccessful){
-            Console.WriteLine("Student Added!");
+            Console.WriteLine("Smartphone Added!");
          }else{
-            Console.WriteLine("Student NOT Added!");
+            Console.WriteLine("Smartphone NOT Added!");
          }
-         Task.Delay(600).Wait();
-         // smartphoneService.AddNewSmartphone();
+         Task.Delay(1600).Wait();
          break;
       case 4:
          isSelected = true;
